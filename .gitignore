@@ -4,6 +4,11 @@
 # Log file
 *.log
 
+*.DS_Store
+**/.idea
+**/out
+**/.gradle
+
 # BlueJ files
 *.ctxt
 
