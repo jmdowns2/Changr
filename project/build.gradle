@@ -12,12 +12,16 @@ repositories {
 dependencies {
   compile (
           'org.springframework.boot:spring-boot-starter-web:2.1.1.RELEASE',
+          'org.springframework.boot:spring-boot-starter-security:2.1.1.RELEASE',
+
           'org.springframework.data:spring-data-releasetrain:Lovelace-RELEASE',
 
           'com.amazonaws.serverless:aws-serverless-java-container-spring:[1.0,)',
           'io.symphonia:lambda-logging:1.0.1',
           'com.github.derjust:spring-data-dynamodb:5.0.3',
-          'com.amazonaws:aws-java-sdk-dynamodb:1.11.491'
+          'com.amazonaws:aws-java-sdk-dynamodb:1.11.491',
+
+          'com.auth0:auth0-spring-security-api:1.1.0'
   )
 
   testCompile("junit:junit:4.12")

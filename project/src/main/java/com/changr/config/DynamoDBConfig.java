@@ -19,28 +19,12 @@ import org.springframework.util.StringUtils;
         (basePackages = "com.changr.service")
 public class DynamoDBConfig {
 
-   // @Autowired
-   // private Environment env;
-
-    @Value("${amazon.dynamodb.endpoint}")
-    private String amazonDynamoDBEndpoint;
-
-    @Value("${amazon.aws.accesskey}")
-    private String amazonAWSAccessKey;
-
-    @Value("${amazon.aws.secretkey}")
-    private String amazonAWSSecretKey;
 
     @Bean
     public AmazonDynamoDB amazonDynamoDB() {
         AmazonDynamoDB amazonDynamoDB
                 = new AmazonDynamoDBClient(new EnvironmentVariableCredentialsProvider());
 
-        /*
-        if (!StringUtils.isEmpty(amazonDynamoDBEndpoint)) {
-            amazonDynamoDB.setEndpoint(amazonDynamoDBEndpoint);
-        }
-*/
         return amazonDynamoDB;
     }
 
