@@ -8,12 +8,14 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @EnableScan
 public interface ProjectRepository extends
         CrudRepository<Project, String> {
 
-    List<Project> findById(Id id);
+    List<Project> findByUser(String user);
+    Optional<Project> findById(String id);
 
     Iterable<Project>	findAll();
 }

@@ -13,11 +13,11 @@ public class Project {
     private String id;
     private String user;
     private String name;
+    private ProjectConfig config;
 
-    public static Project create(String id, String user, String name)
+    public static Project create(String user, String name)
     {
         Project p = new Project();
-        p.id = id;
         p.user = user;
         p.name = name;
         return p;
@@ -49,6 +49,15 @@ public class Project {
     public void setName(String n) {
         name = n;
     }
+
+    @DynamoDBAttribute(attributeName = "config")
+    public ProjectConfig getConfig() {
+        return config;
+    }
+    public void setConfig(ProjectConfig config) {
+        this.config = config;
+    }
+
 
 /*
     @DynamoDBAttribute
