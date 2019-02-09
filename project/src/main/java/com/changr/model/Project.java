@@ -7,6 +7,8 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import org.springframework.data.annotation.Id;
 
+import javax.validation.constraints.NotNull;
+
 @DynamoDBTable(tableName = "projects")
 public class Project {
 
@@ -50,6 +52,7 @@ public class Project {
         name = n;
     }
 
+    @NotNull
     @DynamoDBAttribute(attributeName = "config")
     public ProjectConfig getConfig() {
         return config;

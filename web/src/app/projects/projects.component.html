@@ -1,3 +1,5 @@
-<div *ngFor="let project of projects" > 
-  {{project.name}}
+<h1>Projects</h1>
+
+<div *ngFor="let project of projects" >   
+  <a href="#/projects/{{project.id}}">{{project.name}}</a>
 </div>

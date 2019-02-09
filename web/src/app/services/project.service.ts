@@ -2,17 +2,33 @@ import { Injectable } from '@angular/core';
 //import { Response } from '@angular/http';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Project } from '../schema/project'
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
 
-  constructor(private http:HttpClient) { }
+  private apiBase:string;
+  constructor(private http:HttpClient) { 
+    this.apiBase = environment.apiBase;
+  }
 
-  public getProjects() : Observable<any> {
-    return this.http.get("http://127.0.0.1:8080/")
+  public getProject(id:string) : Observable<Project> {
+    return this.http.get<Project>(`${this.apiBase}/${id}`);
+  }
+
+  public updateProject(project:Project) : Observable<any> {
+    return this.http.put(`${this.apiBase}/${project.id}`, project);
+  }
+
+  public getProjects() : Observable<Array<Project>> {
+    return this.http.get<Array<Project>>(`${this.apiBase}/`);
+  }
+
+  public runProject(p:Project) : Observable<any> {
+    return this.http.post(`${this.apiBase}/${p.id}/run`, {});
   }
 
 }

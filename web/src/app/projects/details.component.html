@@ -1,0 +1,20 @@
+
+<div *ngIf="project != null">
+  <h1>{{project?.name}} Details</h1>
+
+  <div>
+    <label>Type</label>
+    <select [(ngModel)]="project.config.type" >
+      <option value="url">Web</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Url</label>
+    <input [(ngModel)]="project.config.url" />
+  </div>
+
+  <button (click)="save()">Save</button>
+  <button (click)="executeRun()">Run Job</button>
+
+</div>

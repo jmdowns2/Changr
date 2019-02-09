@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiBase: "http://127.0.0.1:8080",
+
+  cognitoAppId: "5v6tdkij3da1arjmtbspi0tmri",
+  cognitoLoginUrl: "https://testing1.auth.us-east-1.amazoncognito.com"
 };
 
 /*

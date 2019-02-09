@@ -1,0 +1,26 @@
+header 
+{
+    height: 100px;
+    background: blue;
+    padding: 10px;
+}
+
+.header-div
+{
+    margin: auto;
+    max-width: 720px;
+}
+
+.title
+{
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+}
+
+.content
+{
+    margin: auto;
+    max-width: 720px;
+    padding: 10px;
+}
