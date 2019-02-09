@@ -1,5 +1,6 @@
 package com.changr;
 
+import com.changr.controller.JobController;
 import com.changr.controller.ProjectController;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -23,7 +24,7 @@ import com.changr.controller.PingController;
 @SpringBootApplication
 // We use direct @Import instead of @ComponentScan to speed up cold starts
 // @ComponentScan(basePackages = "com.changr.controller")
-@Import({ PingController.class, ProjectController.class})
+@Import({ PingController.class, ProjectController.class, JobController.class})
 public class Application extends SpringBootServletInitializer {
 
     /*

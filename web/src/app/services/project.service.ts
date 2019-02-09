@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Project } from '../schema/project'
+import { Job } from '../schema/job'
 import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
@@ -16,19 +17,26 @@ export class ProjectService {
   }
 
   public getProject(id:string) : Observable<Project> {
-    return this.http.get<Project>(`${this.apiBase}/${id}`);
+    return this.http.get<Project>(`${this.apiBase}/projects/${id}`);
   }
 
   public updateProject(project:Project) : Observable<any> {
-    return this.http.put(`${this.apiBase}/${project.id}`, project);
+    return this.http.put(`${this.apiBase}/projects/${project.id}`, project);
   }
 
   public getProjects() : Observable<Array<Project>> {
-    return this.http.get<Array<Project>>(`${this.apiBase}/`);
+    return this.http.get<Array<Project>>(`${this.apiBase}/projects/`);
   }
 
+
+  public getJobs(projectId:string) : Observable<Array<Job>> {
+    return this.http.get<Array<Job>>(`${this.apiBase}/jobs/?project=${projectId}`);
+  }
+
+
   public runProject(p:Project) : Observable<any> {
-    return this.http.post(`${this.apiBase}/${p.id}/run`, {});
+    var payload = { projectId: p.id };
+    return this.http.post(`${this.apiBase}/jobs/`, payload);
   }
 
 }

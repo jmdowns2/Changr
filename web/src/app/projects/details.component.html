@@ -18,3 +18,12 @@
   <button (click)="executeRun()">Run Job</button>
 
 </div>
+
+Jobs
+<div>
+    <div *ngFor="let j of jobs">
+      <a href="#/project/{{id}}/job/{{j.id}}">{{j.id}}</a>
+    </div>
+  
+  </div>
+  

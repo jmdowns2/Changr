@@ -1,17 +1,10 @@
 package com.changr.controller;
 
-import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException;
-import com.auth0.spring.security.api.authentication.AuthenticationJsonWebToken;
 import com.changr.exceptions.ProjectNotFoundException;
-import com.changr.model.FulfillProject;
 import com.changr.model.Project;
 import com.changr.model.ProjectConfig;
 import com.changr.service.ProjectRepository;
-import com.changr.service.ProjectService;
-import com.changr.service.RunExecuteProducer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.annotation.Id;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -20,10 +13,8 @@ import java.util.*;
 
 @RestController
 @EnableWebMvc
+@RequestMapping(path = "/projects")
 public class ProjectController {
-
-    @Autowired
-    private RunExecuteProducer executeProducer;
 
     @Autowired
     private ProjectRepository repo;
@@ -68,7 +59,7 @@ public class ProjectController {
         return ret;
 
     }
-
+/*
     @PostMapping(path = "/{id}/run")
     public String runProject(@PathVariable String id, Authentication auth) {
 
@@ -80,9 +71,10 @@ public class ProjectController {
         if(p.getUser().compareTo(auth.getName()) != 0)
             throw new ProjectNotFoundException();
 
-        FulfillProject fulfill = new FulfillProject(p.getId(), auth.getName());
+        Job fulfill = new Job(p.getId(), auth.getName());
         executeProducer.send(fulfill);
         return "";
     }
+    */
 
 }
