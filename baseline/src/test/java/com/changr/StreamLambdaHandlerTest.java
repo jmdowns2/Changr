@@ -77,7 +77,6 @@ public class StreamLambdaHandlerTest {
             fail(e.getMessage());
         }
     }
-    */
 
     private AwsProxyResponse readResponse(ByteArrayOutputStream responseStream) {
         try {
@@ -88,4 +87,5 @@ public class StreamLambdaHandlerTest {
         }
         return null;
     }
+    */
 }

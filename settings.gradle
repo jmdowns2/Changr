@@ -3,4 +3,5 @@ rootProject.name = 'changr'
 include ':project'
 include 'common'
 include 'fulfiller'
+include 'baseline'
 

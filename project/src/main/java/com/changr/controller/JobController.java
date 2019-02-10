@@ -56,4 +56,16 @@ public class JobController {
         return jobsRepo.findByUserIdAndProjectId(authentication.getName(), p.getId());
     }
 
+    @GetMapping(path = "/{jobId}/")
+    public Job getJob(@PathVariable String jobId, Authentication authentication) {
+
+        Job j = jobsRepo.findById(jobId)
+                .orElseThrow(() -> new ProjectNotFoundException());
+
+        if(j.getUserId().compareTo(authentication.getName()) != 0)
+            throw new ProjectNotFoundException();
+
+        return j;
+    }
+
 }

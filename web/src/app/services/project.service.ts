@@ -28,6 +28,10 @@ export class ProjectService {
     return this.http.get<Array<Project>>(`${this.apiBase}/projects/`);
   }
 
+  public getJob(jobId:string) : Observable<Job> {
+    return this.http.get<Job>(`${this.apiBase}/jobs/${jobId}/`);
+  }
+
 
   public getJobs(projectId:string) : Observable<Array<Job>> {
     return this.http.get<Array<Job>>(`${this.apiBase}/jobs/?project=${projectId}`);
