@@ -1,0 +1,13 @@
+
+
+task buildZip(type: Zip) {
+
+    extension 'zip'
+    destinationDir file("${projectDir}/out/")
+    archiveName 'out.zip'
+
+    from "${projectDir}/src"
+    include '*'
+    include '*/*'
+}
+
