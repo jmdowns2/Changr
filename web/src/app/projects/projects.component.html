@@ -1,5 +1,9 @@
-<h1>Projects</h1>
+<div class="content-body">
+  <div class="page-content">
+    <h1>Projects <button (click)="createProject()">Create Project</button></h1>
 
-<div *ngFor="let project of projects" >   
-  <a href="#/projects/{{project.id}}">{{project.name}}</a>
+    <div class="project" *ngFor="let project of projects" >
+      <a href="#/projects/{{project.id}}">{{project.name}}</a>&nbsp;
+    </div>
+  </div>
 </div>

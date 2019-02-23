@@ -1,6 +1,12 @@
 <header>
     <div class="header-div">
-        <span class="title">Changr</span>
+        <img (click)="onNav('/home')" class="title-logo" src="/assets/caliper.svg"/>
+        <span (click)="onNav('/home')" class="title">CCALIPER</span>
+
+        <div class="nav">
+            <button (click)="onNav('/projects')">Projects</button>
+            <button (click)="onLogin()">Login</button>
+        </div>
     </div>
 </header>
 

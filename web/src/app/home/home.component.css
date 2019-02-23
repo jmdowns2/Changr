@@ -1,0 +1,23 @@
+.background
+{
+    opacity: .80;
+    filter: grayscale(45%);
+    height: 100%;
+    width: 100%;
+    background-image: url("/assets/landing.jpg");
+    background-size: 100% auto;
+    background-position: bottom;
+    background-repeat: no-repeat;    
+}
+
+.text
+{
+    width: 400px;
+    color:white;
+    float:right;
+    font-size: 35px;
+    margin: 50px;
+    padding: 20px;
+    border-radius: 2px;
+    background-color: rgba(33,33,33,.65);
+}

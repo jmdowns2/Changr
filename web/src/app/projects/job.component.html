@@ -1,10 +1,23 @@
-  job works!
 
+<div class="content-body">
+    <div class="page-content">
+  
+      <h1>Job <button (click)="setAsBaseline()">Set as baseline</button></h1>
 
-  <div>
-    {{job?.id}}
-    {{job?.status}}
+      <div>{{job?.id}}</div>
+      <div>{{job?.status}}</div>
+      <div>{{job?.createdDate}}</div>
 
-    
+          
+      Output
+      <div [innerHTML]="output"></div>
+
+      <br/><br/><br/>
+
+      Baseline
+      <div [innerHTML]="baseline"></div>
+
   </div>
+</div>
+
 

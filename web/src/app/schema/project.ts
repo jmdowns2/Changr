@@ -14,3 +14,7 @@ export interface Project {
     user: string;
     config: ProjectConfig;
 }
+
+export interface CreateProject {
+    name:string;
+}

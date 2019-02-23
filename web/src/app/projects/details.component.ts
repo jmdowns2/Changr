@@ -22,11 +22,15 @@ export class DetailsComponent implements OnInit {
       this.id = params["id"];
 
       this.projectService.getProject(this.id).subscribe((p) => { this.project = p;})
-      this.projectService.getJobs(this.id).subscribe((j) => { 
-        this.jobs = j;
-      })
+      this.fetchJobs();
 
     });
+  }
+
+  fetchJobs() {
+    this.projectService.getJobs(this.id).subscribe((j) => { 
+      this.jobs = j;
+    })
   }
 
   save() {
@@ -36,6 +40,8 @@ export class DetailsComponent implements OnInit {
 
   executeRun() {
     this.projectService.runProject(this.project).subscribe(() => {});
+
+    this.fetchJobs();
   }
 
 }

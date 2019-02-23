@@ -1,26 +1,50 @@
+
 header 
 {
-    height: 100px;
-    background: blue;
+    background: white;
     padding: 10px;
+    border-bottom: 2px solid rgba(10, 54, 157, 1);
+
+    box-shadow: 0px 0px 15px #cfdee7;
+
 }
 
 .header-div
 {
-    margin: auto;
-    max-width: 720px;
+    margin: auto 20px;
 }
 
+.title-logo
+{
+    width: 26px;
+}
 .title
 {
-    font-size: 32px;
+    margin-left: 2px;
+    padding: 10px 0;
+    font-size: 35px;
     font-weight: bold;
-    color: white;
+    color: rgba(10, 54, 157, 1);
+}
+
+.nav
+{
+    float: right;
+}
+.nav > button
+{
+    cursor: pointer;
+    margin: 5px;
+    color: #4472ca;
+    font-size: 24px;
+    border: none;
+    background: none;
 }
 
 .content
 {
-    margin: auto;
-    max-width: 720px;
-    padding: 10px;
+    background: #f6f6f6;
+    flex-grow: 1;
+    margin: 0;
+    width: 100%;
 }

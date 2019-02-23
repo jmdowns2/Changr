@@ -14,6 +14,9 @@ export class JobComponent implements OnInit {
   id:string;
   job:Job;
 
+  baseline:string;
+  output:string;
+
   constructor(private route:ActivatedRoute, private projectService:ProjectService) { }
 
   ngOnInit() {
@@ -21,10 +24,28 @@ export class JobComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.id = params["jobId"];
 
-      this.projectService.getJob(this.id).subscribe((j) => { this.job = j;})
+      this.projectService.getJob(this.id).subscribe((j) => { 
+        this.job = j;
+        this.fetchOutput();
+      })
+
+      
 
     });
 
   }
 
+  fetchOutput() { 
+    this.projectService.getBaseline(this.job).subscribe((baseline) => { 
+      this.baseline = baseline;
+    })
+    this.projectService.getJobOutput(this.job).subscribe((out) => { 
+      this.output = out;
+    })
+  }
+  setAsBaseline() {
+    this.projectService.setAsBaseline(this.job).subscribe(() => {
+
+    });
+  }
 }

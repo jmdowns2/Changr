@@ -5,8 +5,12 @@ import { LoginComponent} from "./login/login.component"
 import { ProjectsComponent} from "./projects/projects.component"
 import { DetailsComponent } from './projects/details.component';
 import { JobComponent } from './projects/job.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
+
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
   { path: 'id_token', component: LoginComponent },
   { path: 'projects', component: ProjectsComponent },
   { path: 'projects/:id', component: DetailsComponent },

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service'
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -9,7 +11,7 @@ import { AuthService } from './services/auth.service'
 export class AppComponent {
   title = 'app';
 
-  constructor(private auth:AuthService) {
+  constructor(private auth:AuthService, private router:Router) {
     this.parseIdToken(window.location.hash);
   }
   
@@ -25,6 +27,10 @@ export class AppComponent {
   }
 
 
+  onNav(route:string)
+  {
+    this.router.navigate([route]);
+  }
 
   onLogin() {
     this.auth.login();
