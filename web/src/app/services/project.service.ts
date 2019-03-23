@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-//import { Response } from '@angular/http';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Project, CreateProject } from '../schema/project'
@@ -56,11 +55,15 @@ export class ProjectService {
   }
   
   public getBaseline(job:Job) : Observable<any> {
-    return this.http.get(`${this.baselineBase}/files/project/${job.projectId}/`, {responseType: 'text'});
+    return this.http.get(`${this.baselineBase}/files/project/${job.projectId}/`, {responseType: "blob"});
   }
 
   public getJobOutput(job:Job) : Observable<any> {
-    return this.http.get(`${this.baselineBase}/files/job/${job.id}/`, {responseType: 'text'});
+    return this.http.get(`${this.baselineBase}/files/job/${job.id}/`, {responseType: 'blob'});
+  }
+
+  public getJobOutputDiff(job:Job) : Observable<any> {
+    return this.http.get(`${this.baselineBase}/files/job/${job.id}/diff`, {responseType: 'blob'});
   }
 
 }

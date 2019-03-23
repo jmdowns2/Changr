@@ -26,7 +26,15 @@ public class BaselineController {
     void getJobOutput(@PathVariable String jobId, Authentication auth, HttpServletResponse response) throws IOException {
         InputStream in = files.getOutput(jobId);
 
-        response.setContentType(MediaType.TEXT_HTML_VALUE);
+        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+        IOUtils.copy(in, response.getOutputStream());
+    }
+
+    @GetMapping(path="/job/{jobId}/diff")
+    void getJobOutputDiff(@PathVariable String jobId, Authentication auth, HttpServletResponse response) throws IOException {
+        InputStream in = files.getOutputDiff(jobId);
+
+        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
         IOUtils.copy(in, response.getOutputStream());
     }
 
@@ -41,7 +49,7 @@ public class BaselineController {
             throw new BaselineNotFoundException();
         }
 
-        response.setContentType(MediaType.TEXT_HTML_VALUE);
+        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
         IOUtils.copy(in, response.getOutputStream());
     }
 

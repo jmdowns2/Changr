@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../services/project.service';
 import { Job } from '../schema/job';
+import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 
 
 @Component({
@@ -14,10 +15,15 @@ export class JobComponent implements OnInit {
   id:string;
   job:Job;
 
-  baseline:string;
-  output:string;
+  baselineUrl:SafeUrl = "";
+  outputUrl:SafeUrl = "";
+  diffUrl:SafeUrl = "";
 
-  constructor(private route:ActivatedRoute, private projectService:ProjectService) { }
+  showDiff:boolean = true;
+  showOriginal:boolean = false;
+  showCurrent:boolean = true;
+
+  constructor(private route:ActivatedRoute, private projectService:ProjectService, private sanitizer:DomSanitizer) { }
 
   ngOnInit() {
 
@@ -28,24 +34,27 @@ export class JobComponent implements OnInit {
         this.job = j;
         this.fetchOutput();
       })
-
-      
-
     });
-
   }
 
   fetchOutput() { 
     this.projectService.getBaseline(this.job).subscribe((baseline) => { 
-      this.baseline = baseline;
+      this.baselineUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(baseline));
     })
     this.projectService.getJobOutput(this.job).subscribe((out) => { 
-      this.output = out;
+      this.outputUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(out));
     })
+    this.projectService.getJobOutputDiff(this.job).subscribe((out) => { 
+      this.diffUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(out));
+    })
+
+    
   }
   setAsBaseline() {
     this.projectService.setAsBaseline(this.job).subscribe(() => {
 
     });
   }
+
+  
 }

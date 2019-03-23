@@ -1,0 +1,23 @@
+.output-panel
+{
+    position: relative;
+    width: 80%;
+    margin: 10px;
+    max-height: 400px;
+    overflow: auto;
+
+}
+
+.output-panel > img
+{
+    width: 100%;
+}
+
+.diff-img
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    mix-blend-mode: multiply;
+}

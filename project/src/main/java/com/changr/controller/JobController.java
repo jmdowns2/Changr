@@ -45,7 +45,7 @@ public class JobController {
     public List<Job> listForProject(@RequestParam(required = false) String projectId, Authentication authentication) {
 
         if(projectId == null)
-            return jobsRepo.findByUserId(authentication.getName());
+            return jobsRepo.findByUser(authentication.getName());
 
         Project p = projectRepo.findById(projectId)
                 .orElseThrow(() -> new ProjectNotFoundException());
@@ -53,7 +53,7 @@ public class JobController {
         if(p.getUser().compareTo(authentication.getName()) != 0)
             throw new ProjectNotFoundException();
 
-        return jobsRepo.findByUserIdAndProjectId(authentication.getName(), p.getId());
+        return jobsRepo.findByUserAndProjectId(authentication.getName(), p.getId());
     }
 
     @GetMapping(path = "/{jobId}/")
@@ -62,7 +62,7 @@ public class JobController {
         Job j = jobsRepo.findById(jobId)
                 .orElseThrow(() -> new ProjectNotFoundException());
 
-        if(j.getUserId().compareTo(authentication.getName()) != 0)
+        if(j.getUser().compareTo(authentication.getName()) != 0)
             throw new ProjectNotFoundException();
 
         return j;

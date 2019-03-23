@@ -1,8 +1,5 @@
 package com.changr;
 
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
 import com.changr.controller.BaselineController;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;

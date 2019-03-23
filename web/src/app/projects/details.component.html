@@ -33,7 +33,7 @@
       <h1>Jobs</h1>
       <div>
           <div *ngFor="let j of jobs">
-            <a href="#/job/{{j.id}}">{{j.createdDate}}</a>
+            <a href="#/job/{{j.id}}">{{j.createdDate | date : "medium" }}</a>
           </div>
       </div>
   

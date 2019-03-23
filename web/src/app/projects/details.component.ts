@@ -29,6 +29,7 @@ export class DetailsComponent implements OnInit {
 
   fetchJobs() {
     this.projectService.getJobs(this.id).subscribe((j) => { 
+      j =j.sort((a, b) => new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime() )
       this.jobs = j;
     })
   }

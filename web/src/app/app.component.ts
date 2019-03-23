@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service'
-import { Router } from '@angular/router';
-
+import { Router, NavigationStart } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { environment } from "../environments/environment";
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,13 @@ export class AppComponent {
 
   constructor(private auth:AuthService, private router:Router) {
     this.parseIdToken(window.location.hash);
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationStart))
+      .subscribe((event:NavigationStart) => {
+        //event.url
+        (<any>window).gtag('config', environment.gaMeasurementId, {'page_path': event.url });
+      });
   }
   
   private parseIdToken(hash:String)

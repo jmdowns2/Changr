@@ -27,6 +27,7 @@ public class StreamLambdaHandlerTest {
     private static StreamLambdaHandler handler;
     private static Context lambdaContext;
 
+
     @BeforeClass
     public static void setUp() {
         handler = new StreamLambdaHandler();

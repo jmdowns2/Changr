@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 @Service
 public class FileService {
 
-    final String BASELINE_FILE = "out.html";
+    final String BASELINE_FILE = "out.png";
 
 
     @Value(value = "${bucket}")
@@ -35,15 +35,21 @@ public class FileService {
     public InputStream getOutput(String jobId)
     {
         Job job = jobsRepo.findById(jobId).orElseThrow(() -> new BaselineNotFoundException());
-        String key = job.getOutput();
+        String key = job.getUser()+"/"+job.getProjectId()+"/jobs/"+job.getId()+"/out.png";
+        return s3.getObject(bucket, key).getObjectContent();
+    }
 
+    public InputStream getOutputDiff(String jobId)
+    {
+        Job job = jobsRepo.findById(jobId).orElseThrow(() -> new BaselineNotFoundException());
+        String key = job.getUser()+"/"+job.getProjectId()+"/jobs/"+job.getId()+"/out-diff.png";
         return s3.getObject(bucket, key).getObjectContent();
     }
 
     public void makeBaseline(String jobId)
     {
         Job job = jobsRepo.findById(jobId).orElseThrow(() -> new BaselineNotFoundException());
-        String outputKey = job.getOutput();
+        String outputKey = job.getUser()+"/"+job.getProjectId()+"/jobs/"+job.getId()+"/out.png";
 
         Project p = projectRepo.findById(job.getProjectId()).orElseThrow(() -> new BaselineNotFoundException());
         String baselineKey = buildBaselineKey(p);
@@ -55,6 +61,7 @@ public class FileService {
     {
         Project p = projectRepo.findById(projectId).orElseThrow( () -> new BaselineNotFoundException() );
         String key = buildBaselineKey(p);
+
 
         if(!s3.doesObjectExist(bucket, key))
             return null;

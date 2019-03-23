@@ -13,8 +13,8 @@ import java.util.Optional;
 public interface JobRepository extends
         CrudRepository<Job, String> {
 
-    List<Job> findByUserId(String user);
-    List<Job> findByUserIdAndProjectId(String user, String projectId);
+    List<Job> findByUser(String user);
+    List<Job> findByUserAndProjectId(String user, String projectId);
     Optional<Job> findById(String id);
 
 
