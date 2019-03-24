@@ -13,12 +13,14 @@
       <button (click)="showOriginal = false; showCurrent = true;">Current</button>
       Show Diff <input type="checkbox" ([ngModel])="showDiff" />
 
-      <div>
+      <div class="mobile-display">
         <div class="output-panel" >
           <img [src]="baselineUrl" *ngIf="showOriginal" />
           <img [src]="outputUrl" *ngIf="showCurrent"/>
           <img class="diff-img" [src]="diffUrl" *ngIf="showDiff" />
         </div>
+
+        <div class="phone-frame"></div>        
       </div>
       <div style="clear: both;"></div>
 

@@ -1,11 +1,31 @@
+.mobile-display
+{
+    position: relative;
+    width: 425px;
+    height: 820px;
+}
+
 .output-panel
 {
     position: relative;
+    top: 55px;
+    left: 33px;
     width: 80%;
     margin: 10px;
-    max-height: 400px;
+    max-height: 750px;
     overflow: auto;
+}
 
+.phone-frame
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/assets/display/Apple iPhone X Space Grey.png');
+    background-size: cover;
+    pointer-events: none;
 }
 
 .output-panel > img
