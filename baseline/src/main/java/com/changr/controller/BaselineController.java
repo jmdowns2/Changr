@@ -2,6 +2,7 @@ package com.changr.controller;
 
 import com.amazonaws.util.IOUtils;
 import com.changr.exceptions.BaselineNotFoundException;
+import com.changr.model.FileResponse;
 import com.changr.model.MakeBaseline;
 import com.changr.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 @RestController
 @EnableWebMvc
@@ -22,38 +24,36 @@ public class BaselineController {
     @Autowired
     FileService files;
 
-    @GetMapping(path="/job/{jobId}/")
-    void getJobOutput(@PathVariable String jobId, Authentication auth, HttpServletResponse response) throws IOException {
-        InputStream in = files.getOutput(jobId);
+    @GetMapping(path="/job/{jobId}")
+    FileResponse getJobOutput(@PathVariable String jobId, Authentication auth, HttpServletResponse response) throws IOException {
+        URL url = files.getOutput(jobId);
 
-        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
-        IOUtils.copy(in, response.getOutputStream());
+        return new FileResponse(url.toExternalForm());
     }
 
     @GetMapping(path="/job/{jobId}/diff")
-    void getJobOutputDiff(@PathVariable String jobId, Authentication auth, HttpServletResponse response) throws IOException {
-        InputStream in = files.getOutputDiff(jobId);
+    FileResponse getJobOutputDiff(@PathVariable String jobId, Authentication auth, HttpServletResponse response) throws IOException {
+        URL url =  files.getOutputDiff(jobId);
 
-        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
-        IOUtils.copy(in, response.getOutputStream());
+        return new FileResponse(url.toExternalForm());
     }
 
 
 
-    @GetMapping(path="/project/{projectId}/")
-    void getBaselineOutput(@PathVariable String projectId, Authentication auth, HttpServletResponse response) throws IOException {
-        InputStream in = files.getBaseline(projectId);
 
-        if(in == null)
+    @GetMapping(path="/project/{projectId}")
+    FileResponse getBaselineOutput(@PathVariable String projectId, Authentication auth, HttpServletResponse response) throws IOException {
+        URL url = files.getBaseline(projectId);
+
+        if(url == null)
         {
             throw new BaselineNotFoundException();
         }
 
-        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
-        IOUtils.copy(in, response.getOutputStream());
+        return new FileResponse(url.toExternalForm());
     }
 
-    @PostMapping(path="/project/{projectId}/")
+    @PostMapping(path="/project/{projectId}")
     void makeBaseline(@RequestBody MakeBaseline body, @PathVariable String projectId, Authentication auth)  {
 
         files.makeBaseline(body.newBaselineJobId);

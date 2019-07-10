@@ -1,0 +1,33 @@
+.page-content {
+    padding: 80px;
+}
+
+.content {
+    max-width: 720px;
+    margin: auto;
+}
+
+.title {
+    font-size: 38pt;
+    text-align: center;
+}
+
+h1 {
+    padding: 0;
+}
+
+li {
+    font-size: 18pt;
+}
+
+p
+{
+    font-size: 18pt;
+}
+
+p > img {
+    max-width: 500px;
+}
+
+.signup {
+}

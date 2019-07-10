@@ -28,7 +28,7 @@ public class JobController {
     @Autowired
     private ProjectRepository projectRepo;
 
-    @PostMapping(path = "/")
+    @PostMapping()
     public void create(@RequestBody JobCreation body, Authentication authentication) {
 
         Project p = projectRepo.findById(body.projectId)
@@ -41,7 +41,7 @@ public class JobController {
         jobsRepo.save(j);
     }
 
-    @GetMapping(path = "/")
+    @GetMapping()
     public List<Job> listForProject(@RequestParam(required = false) String projectId, Authentication authentication) {
 
         if(projectId == null)
@@ -56,7 +56,7 @@ public class JobController {
         return jobsRepo.findByUserAndProjectId(authentication.getName(), p.getId());
     }
 
-    @GetMapping(path = "/{jobId}/")
+    @GetMapping(path = "/{jobId}")
     public Job getJob(@PathVariable String jobId, Authentication authentication) {
 
         Job j = jobsRepo.findById(jobId)

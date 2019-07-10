@@ -1,7 +1,8 @@
 rootProject.name = 'changr'
 
 include ':project'
-include 'common'
-include 'fulfiller'
-include 'baseline'
+include ':common'
+include ':fulfiller'
+include ':baseline'
+include ':runner'
 

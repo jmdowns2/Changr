@@ -14,13 +14,15 @@ import { AuthService } from './services/auth.service';
 
 import { UnathorizedInterceptor } from './services/unauthorized.interceptor'
 import { JWTInterceptor } from './services/jwt.interceptor';
-import { HomeComponent } from './home/home.component'
+import { HomeComponent } from './home/home.component';
+import { LearnMoreComponent } from './learn-more/learn-more.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
+    LearnMoreComponent,
   ],
   imports: [
     BrowserModule,

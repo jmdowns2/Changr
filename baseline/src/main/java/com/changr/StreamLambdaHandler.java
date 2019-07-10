@@ -30,7 +30,7 @@ public class StreamLambdaHandler implements RequestStreamHandler {
     @Override
     public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context)
             throws IOException {
-        handler.stripBasePath("/baseline");
+        //handler.stripBasePath("/files");
         handler.proxyStream(inputStream, outputStream, context);
     }
 }

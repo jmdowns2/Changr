@@ -11,6 +11,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.stream.Stream;
 
 
@@ -32,18 +36,25 @@ public class FileService {
     @Autowired
     AmazonS3 s3;
 
-    public InputStream getOutput(String jobId)
+    private Date getPresignedUrlExpiration()
+    {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.HOUR, 6);
+        return cal.getTime();
+    }
+
+    public URL getOutput(String jobId)
     {
         Job job = jobsRepo.findById(jobId).orElseThrow(() -> new BaselineNotFoundException());
         String key = job.getUser()+"/"+job.getProjectId()+"/jobs/"+job.getId()+"/out.png";
-        return s3.getObject(bucket, key).getObjectContent();
+        return s3.generatePresignedUrl(bucket, key, getPresignedUrlExpiration());
     }
 
-    public InputStream getOutputDiff(String jobId)
+    public URL getOutputDiff(String jobId)
     {
         Job job = jobsRepo.findById(jobId).orElseThrow(() -> new BaselineNotFoundException());
         String key = job.getUser()+"/"+job.getProjectId()+"/jobs/"+job.getId()+"/out-diff.png";
-        return s3.getObject(bucket, key).getObjectContent();
+        return s3.generatePresignedUrl(bucket, key, getPresignedUrlExpiration());
     }
 
     public void makeBaseline(String jobId)
@@ -57,7 +68,7 @@ public class FileService {
         s3.copyObject(bucket, outputKey, bucket, baselineKey);
     }
 
-    public InputStream getBaseline(String projectId)
+    public URL getBaseline(String projectId)
     {
         Project p = projectRepo.findById(projectId).orElseThrow( () -> new BaselineNotFoundException() );
         String key = buildBaselineKey(p);
@@ -66,7 +77,7 @@ public class FileService {
         if(!s3.doesObjectExist(bucket, key))
             return null;
 
-        return s3.getObject(bucket, key).getObjectContent();
+        return s3.generatePresignedUrl(bucket, key, getPresignedUrlExpiration());
     }
 
     protected String buildBaselineKey(Project p)

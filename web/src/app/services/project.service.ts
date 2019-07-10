@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Project, CreateProject } from '../schema/project'
-import { Job } from '../schema/job'
-import { environment } from 'src/environments/environment.prod';
+import { Job } from '../schema/job';
+import { File } from '../schema/file';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -54,16 +55,16 @@ export class ProjectService {
     return this.http.post(`${this.baselineBase}/files/project/${job.projectId}/`, payload);
   }
   
-  public getBaseline(job:Job) : Observable<any> {
-    return this.http.get(`${this.baselineBase}/files/project/${job.projectId}/`, {responseType: "blob"});
+  public getBaseline(job:Job) : Observable<File> {
+    return this.http.get<File>(`${this.baselineBase}/files/project/${job.projectId}/`);
   }
 
-  public getJobOutput(job:Job) : Observable<any> {
-    return this.http.get(`${this.baselineBase}/files/job/${job.id}/`, {responseType: 'blob'});
+  public getJobOutput(job:Job) : Observable<File> {
+    return this.http.get<File>(`${this.baselineBase}/files/job/${job.id}/`);
   }
 
-  public getJobOutputDiff(job:Job) : Observable<any> {
-    return this.http.get(`${this.baselineBase}/files/job/${job.id}/diff`, {responseType: 'blob'});
+  public getJobOutputDiff(job:Job) : Observable<File> {
+    return this.http.get<File>(`${this.baselineBase}/files/job/${job.id}/diff`);
   }
 
 }

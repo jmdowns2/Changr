@@ -13,7 +13,7 @@ import java.util.Map;
 @EnableWebMvc
 public class PingController {
 
-    @RequestMapping(path = "/baseline/ping", method = RequestMethod.GET)
+    @RequestMapping(path = "/files/ping", method = RequestMethod.GET)
     public Map<String, String> ping() {
         Map<String, String> pong = new HashMap<>();
         pong.put("pong", "Hello, World!");

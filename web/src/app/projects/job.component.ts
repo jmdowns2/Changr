@@ -23,7 +23,7 @@ export class JobComponent implements OnInit {
   showOriginal:boolean = false;
   showCurrent:boolean = true;
 
-  constructor(private route:ActivatedRoute, private projectService:ProjectService, private sanitizer:DomSanitizer) { }
+  constructor(private route:ActivatedRoute, private projectService:ProjectService) { }
 
   ngOnInit() {
 
@@ -39,13 +39,13 @@ export class JobComponent implements OnInit {
 
   fetchOutput() { 
     this.projectService.getBaseline(this.job).subscribe((baseline) => { 
-      this.baselineUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(baseline));
+      this.baselineUrl = baseline.url;
     })
     this.projectService.getJobOutput(this.job).subscribe((out) => { 
-      this.outputUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(out));
+      this.outputUrl = out.url;
     })
     this.projectService.getJobOutputDiff(this.job).subscribe((out) => { 
-      this.diffUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(out));
+      this.diffUrl = out.url;
     })
 
     

@@ -50,7 +50,7 @@ public class ProjectController {
         repo.save(p);
     }
 
-    @RequestMapping(path = "/", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public List<Project> getProjects() {
 
         Iterable<Project> it = repo.findAll();

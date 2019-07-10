@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  apiBase: "http://127.0.0.1:8080",
-  baselineBase: "http://127.0.0.1:8081",
+  apiBase: "https://api.calipr.co",
+  baselineBase: "https://api.calipr.co",
 
   cognitoAppId: "5v6tdkij3da1arjmtbspi0tmri",
   cognitoLoginUrl: "https://testing1.auth.us-east-1.amazoncognito.com",
